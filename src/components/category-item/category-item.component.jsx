@@ -1,4 +1,4 @@
-import "./catgory.style.scss";
+import "./category.style.scss";
 
 export default function CategoryItem({cat}) {
   return(

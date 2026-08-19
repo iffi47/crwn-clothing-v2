@@ -1,3 +1,5 @@
+import "./catgory.style.scss";
+
 export default function CategoryItem({cat}) {
   return(
     <>

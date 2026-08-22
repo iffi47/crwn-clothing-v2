@@ -7,6 +7,7 @@ export default function Directory({ categories }) {
       <div className="categories-container">
         {categories.map((cat) => (
           <CategoryItem
+            key={cat.id}
             cat={cat}
             id={cat.id}
           />

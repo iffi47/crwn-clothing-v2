@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
+import {
+ getAuth,
+ GoogleAuthProvider,
+ signInWithPopup,
+ signInWithRedirect,
+} from "firebase/auth";
+import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,12 +20,36 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
-
 const provider = new GoogleAuthProvider();
 
 provider.getCustomParameters({
-  prompt: "select_account"
+ prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signinWithGooglePopup = ()=> signInWithPopup(auth, provider);
+export const signinWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signinWithGoogleRedirect = () =>
+ signInWithRedirect(auth, provider);
+
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+ const userDocRef = doc(db, "users", userAuth.uid);
+ console.log(userDocRef);
+ const userSnapShot = await getDoc(userDocRef);
+ console.log(userSnapShot, userSnapShot.exists());
+ if (!userSnapShot.exists()) {
+  const { displayName, email } = userAuth;
+  const createdAt = new Date();
+  try {
+   await setDoc(userDocRef, {
+    displayName,
+    email,
+    createdAt,
+   });
+  } catch (error) {
+   console.error(error);
+  }
+ }
+ return userDocRef;
+};

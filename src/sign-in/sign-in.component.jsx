@@ -12,13 +12,13 @@ export default function SignIn() {
   //   const { user } = await signinWithGoogleRedirect();
   //   console.log({ user });
   // }
-  useEffect(async () => {
-    const response = await getRedirectResult(auth);
-    console.log(response);
-    if (response) {
-      const userDocRef = await createUserDocumentFromAuth(response.user);
-    }
-  }, [])
+  // useEffect(async () => {
+  //   const response = await getRedirectResult(auth);
+  //   console.log(response);
+  //   if (response) {
+  //     const userDocRef = await createUserDocumentFromAuth(response.user);
+  //   }
+  // }, [])
   return(
     <>
       <div>
@@ -26,7 +26,7 @@ export default function SignIn() {
           Sign In Page
         </h1>
         <button onClick={logGoogleUser}>Sign in With Google</button>
-        <button onClick={signinWithGoogleRedirect}>Sign in With Google Redirect</button>
+        {/* <button onClick={signinWithGoogleRedirect}>Sign in With Google Redirect</button> */}
       </div>
     </>
   )

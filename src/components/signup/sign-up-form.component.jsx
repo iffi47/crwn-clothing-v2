@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword } from "../../utlis/firebase.utils";
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utlis/firebase.utils";
 
 const defaultFormFields = {
   displayName: "",
@@ -19,8 +19,12 @@ export default function SignUp() {
     if (password !== confirmPassword) return;
     if (!displayName || !email) return;
     try {
-      const response = await createAuthUserWithEmailAndPassword(email, password)
+      const { user } = await createAuthUserWithEmailAndPassword(email, password);
+      await createUserDocumentFromAuth(user, { displayName })
     } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        alert("User already existed!")
+      }
       console.error(error);
     }
   }

@@ -5,25 +5,27 @@ import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
 
 const defaultFormFields = {
-  displayName: "",
   email: "",
   password: "",
-  confirmPassword: ""
-}
+};
 
-export default function SignUp() {
+
+
+export default function SignIn() {
   const [userData, setUserData] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = userData;
+  const { email, password } = userData;
+  const resetFormFields = () => {
+  setUserData(defaultFormFields)
+}
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value })
     // console.log(userData);
-    if (password !== confirmPassword) return;
+    // if (password !== confirmPassword) return;
     if (!displayName || !email) return;
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth(user, { displayName })
+      resetFormFields();
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert("User already existed!")
@@ -33,15 +35,13 @@ export default function SignUp() {
   }
   return (
     <>
-      <div className="sign-up-container">
-        <h2>Did not have an account?</h2>
-        <span>Sign up with your email and password</span>
+      <div className="sign-in-container">
+        <h2>Already have an account?</h2>
+        <span>Sign in with your email and password</span>
         <form onSubmit={handleSubmit}>
-          <FormInput label="Display Name" required type="text" name="displayName" value={displayName} onChange={handleSubmit} />
           <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmit} />
           <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmit} />
-          <FormInput label="Confirm Password" required type="password" name="confirmPassword" value={confirmPassword} onChange={handleSubmit} />
-          <Button type="submit">SignUp</Button>
+          <Button type="submit">SignIn</Button>
         </form>
       </div>
     </>

@@ -5,6 +5,7 @@ import {
  signInWithPopup,
  signInWithRedirect,
  createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
+ signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
@@ -31,6 +32,16 @@ export const auth = getAuth();
 export const signinWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signinWithGoogleRedirect = () =>
  signInWithRedirect(auth, provider);
+export const signinWithMailAndPassword = async (email, password) => {
+ if (!email || !password) return;
+ const response = await signInWithEmailAndPassword(auth, email, password);
+ const data = await response.json();
+ if (data) {
+  return data;
+ } else {
+  return "Invalid email and password";
+ }
+};
 
 export const db = getFirestore();
 

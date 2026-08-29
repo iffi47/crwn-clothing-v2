@@ -15,7 +15,7 @@ const App = () => {
      />
     </Route>
     <Route
-     path="/signin"
+     path="/auth"
      element={<Authentication />}
     />
    </Routes>

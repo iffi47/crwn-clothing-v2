@@ -34,10 +34,16 @@ export default function SignIn() {
       
       resetFormFields();
     } catch (error) {
-      if (error.code === 'auth/invalid-credential') {
-        alert(error.message)
+      switch (error.code) {
+        case 'auth/invalid-credential':
+          alert(error.message)
+          break;
+        case 'auth/user-not-found':
+          alert(error.message);
+          break
+        default:
+          console.error(error);
       }
-      console.error(error);
     }
   };
   const signInWithGoogle = async () => {

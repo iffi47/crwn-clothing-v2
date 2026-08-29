@@ -25,9 +25,9 @@ export default function Authentication() {
     <>
       <div>
         <h1>
-          Sign In Page
+          Authentication Page
         </h1>
-        <button onClick={logGoogleUser}>Sign in With Google</button>
+        {/* <button onClick={logGoogleUser}>Sign in With Google</button> */}
         {/* <button onClick={signinWithGoogleRedirect}>Sign in With Google Redirect</button> */}
         <SignIn/>
         <SignUp/>

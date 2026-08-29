@@ -13,11 +13,11 @@ const App = () => {
       index
       element={<Home />}
      />
+     <Route
+      path="/auth"
+      element={<Authentication />}
+     />
     </Route>
-    <Route
-     path="/auth"
-     element={<Authentication />}
-    />
    </Routes>
   </>
  );

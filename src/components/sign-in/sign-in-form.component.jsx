@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utlis/firebase.utils";
 import FormInput from "../form-input/form-input.component";
-import "./sign-up-form.styles.scss";
+import "./sign-in.styles.scss";
 import Button from "../button/button.component";
 
 const defaultFormFields = {
@@ -23,7 +23,7 @@ export default function SignIn() {
     setUserData({ ...userData, [name]: value })
     // console.log(userData);
     // if (password !== confirmPassword) return;
-    if (!displayName || !email) return;
+    if (!password || !email) return;
     try {
       resetFormFields();
     } catch (error) {

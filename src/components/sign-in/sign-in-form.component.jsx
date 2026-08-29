@@ -34,7 +34,7 @@ export default function SignIn() {
       
       resetFormFields();
     } catch (error) {
-      if (error.code === 400) {
+      if (error.code === 'auth/invalid-credential') {
         alert(error.message)
       }
       console.error(error);

@@ -34,13 +34,7 @@ export const signinWithGoogleRedirect = () =>
  signInWithRedirect(auth, provider);
 export const signinWithMailAndPassword = async (email, password) => {
  if (!email || !password) return;
- const response = await signInWithEmailAndPassword(auth, email, password);
- const data = await response.json();
- if (data) {
-  return data;
- } else {
-  return "Invalid email and password";
- }
+ return await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const db = getFirestore();

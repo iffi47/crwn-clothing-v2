@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, auth, signinWithGooglePopup } from "../../utlis/firebase.utils";
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, auth, signinWithGooglePopup, signinWithMailAndPassword } from "../../utlis/firebase.utils";
 import { getRedirectResult } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in.styles.scss";
@@ -17,19 +17,25 @@ export default function SignIn() {
   const { email, password } = userData;
   const resetFormFields = () => {
     setUserData(defaultFormFields)
-  }
-  const handleSubmit = async (event) => {
+  };
+  const handleSubmitData= (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value })
+    setUserData({ ...userData, [name]: value });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     // console.log(userData);
     // if (password !== confirmPassword) return;
     if (!password || !email) return;
     try {
+      const response = await signinWithMailAndPassword(email, password)
+      console.log(response);
+      
       resetFormFields();
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert("User already existed!")
+      if (error.code === 400) {
+        alert(error.message)
       }
       console.error(error);
     }
@@ -45,8 +51,8 @@ export default function SignIn() {
         <h2>Already have an account?</h2>
         <span>Sign in with your email and password</span>
         <form onSubmit={handleSubmit}>
-          <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmit} />
-          <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmit} />
+          <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmitData} />
+          <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmitData} />
           <div className="buttons-container">
             <Button buttonType="inverted" type="submit">SignIn</Button>
             <Button buttonType="google" onClick={signInWithGoogle} type="button">Sign in with Google</Button>

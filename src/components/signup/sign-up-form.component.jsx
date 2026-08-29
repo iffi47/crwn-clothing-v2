@@ -14,10 +14,13 @@ const defaultFormFields = {
 export default function SignUp() {
   const [userData, setUserData] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = userData;
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmitData= (event) => {
+       event.preventDefault();
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value })
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     // console.log(userData);
     if (password !== confirmPassword) return;
     if (!displayName || !email) return;
@@ -37,10 +40,10 @@ export default function SignUp() {
         <h2>Did not have an account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={handleSubmit}>
-          <FormInput label="Display Name" required type="text" name="displayName" value={displayName} onChange={handleSubmit} />
-          <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmit} />
-          <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmit} />
-          <FormInput label="Confirm Password" required type="password" name="confirmPassword" value={confirmPassword} onChange={handleSubmit} />
+          <FormInput label="Display Name" required type="text" name="displayName" value={displayName} onChange={handleSubmitData} />
+          <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmitData} />
+          <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmitData} />
+          <FormInput label="Confirm Password" required type="password" name="confirmPassword" value={confirmPassword} onChange={handleSubmitData} />
           <Button type="submit">SignUp</Button>
         </form>
       </div>

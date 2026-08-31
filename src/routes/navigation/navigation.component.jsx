@@ -3,11 +3,14 @@ import "./navigation.style.scss";
 import { ReactComponent as CrownLogo } from "../../assets/images/007 crown.svg";
 import { UserContext } from "../../contexts/user.context";
 import { useContext } from "react";
+import { signOutUser } from "../../utlis/firebase.utils";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const handleSignOut = () => {
     console.log("Signout ");
+    signOutUser();
+    setCurrentUser(null)
   }
  return (
    <>

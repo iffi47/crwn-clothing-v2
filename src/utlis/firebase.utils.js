@@ -6,6 +6,7 @@ import {
  signInWithRedirect,
  createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
  signInWithEmailAndPassword,
+ signOut
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
@@ -65,3 +66,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
  if (!email || !password) return;
  return firebaseCreateUserWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = (auth) => {
+  signOut(auth);
+}

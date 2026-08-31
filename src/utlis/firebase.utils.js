@@ -6,7 +6,7 @@ import {
  signInWithRedirect,
  createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
  signInWithEmailAndPassword,
- signOut
+ signOut,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
@@ -43,9 +43,9 @@ export const db = getFirestore();
 export const createUserDocumentFromAuth = async (userAuth) => {
  if (!userAuth) return;
  const userDocRef = doc(db, "users", userAuth.uid);
-//  console.log(userDocRef);
+ //  console.log(userDocRef);
  const userSnapShot = await getDoc(userDocRef);
-//  console.log(userSnapShot, userSnapShot.exists());
+ //  console.log(userSnapShot, userSnapShot.exists());
  if (!userSnapShot.exists()) {
   const { displayName, email } = userAuth;
   const createdAt = new Date();
@@ -67,6 +67,6 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
  return firebaseCreateUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signOutUser = (auth) => {
-  signOut(auth);
-}
+export const signOutUser = async () => {
+ await signOut(auth);
+};

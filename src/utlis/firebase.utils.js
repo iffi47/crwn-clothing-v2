@@ -7,8 +7,10 @@ import {
  createUserWithEmailAndPassword as firebaseCreateUserWithEmailAndPassword,
  signInWithEmailAndPassword,
  signOut,
+ onAuthStateChanged,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { log10 } from "firebase/firestore/pipelines";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -69,4 +71,9 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => {
  await signOut(auth);
+};
+
+export const onAuthStateChangedListener = (callback) => {
+ console.log(callback);
+ onAuthStateChanged(auth, callback);
 };

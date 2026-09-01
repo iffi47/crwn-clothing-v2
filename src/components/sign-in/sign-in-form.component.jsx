@@ -47,9 +47,9 @@ export default function SignIn() {
     }
   };
   const signInWithGoogle = async () => {
-    const { user } = await signinWithGooglePopup();
+    await signinWithGooglePopup();
     // setCurrentUser(user);
-    await createUserDocumentFromAuth(user)
+    // await createUserDocumentFromAuth(user)
     // console.log(response);
   };
   return (

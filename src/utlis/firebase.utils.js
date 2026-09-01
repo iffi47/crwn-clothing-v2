@@ -10,7 +10,6 @@ import {
  onAuthStateChanged,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
-import { log10 } from "firebase/firestore/pipelines";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

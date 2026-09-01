@@ -17,7 +17,7 @@ const defaultFormFields = {
 export default function SignUp() {
   const [userData, setUserData] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = userData;
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  // const { currentUser, setCurrentUser } = useContext(UserContext);
   const handleSubmitData= (event) => {
        event.preventDefault();
     const { name, value } = event.target;

@@ -22,7 +22,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
@@ -30,7 +30,7 @@ provider.getCustomParameters({
  prompt: "select_account",
 });
 
-export const auth = getAuth();
+export const auth = getAuth(app);
 export const signinWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signinWithGoogleRedirect = () =>
  signInWithRedirect(auth, provider);
@@ -69,7 +69,8 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => {
- await signOut(auth);
+  if (!auth) return;
+  await signOut(auth);
 };
 
 export const onAuthStateChangedListener = (callback) => {

@@ -10,9 +10,11 @@ export const CartContext = createContext({
 export const CartProvider = ({children}) => {
   const [isCartOpen, setIsCart] = useState(false);
   const toggleCart =() => {
-    setIsCart((prev) => {
-      return !prev
-    })
+   setIsCart((prev) => {
+    return !prev;
+   });
+   console.log(isCartOpen);
+   return isCartOpen;
   }
   const value = {isCartOpen, toggleCart};
 

@@ -9,7 +9,14 @@ import {
  signOut,
  onAuthStateChanged,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import {
+ doc,
+ getDoc,
+ setDoc,
+ getFirestore,
+ collection,
+ writeBatch,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -40,6 +47,21 @@ export const signinWithMailAndPassword = async (email, password) => {
 };
 
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (
+ collectionKey,
+ objectsToAdd,
+ field,
+) => {
+ const collectionReference = collection(db, collectionKey);
+ const batch = writeBatch(db);
+ objectsToAdd.forEach((element) => {
+  const docRef = doc(collectionReference, element.title.toLowerCase());
+  batch.set(docRef, element);
+ });
+ await batch.commit();
+ console.log("Done!");
+};
 
 export const createUserDocumentFromAuth = async (userAuth) => {
  if (!userAuth) return;

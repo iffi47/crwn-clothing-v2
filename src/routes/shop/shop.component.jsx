@@ -8,12 +8,16 @@ export default function Shop() {
   return (
     <div className="products-container">
       {Object.keys(categories).map((title) => {
-        <h2>{title}</h2>
-        {
-          categories[title].map((category) => (
-            <ProductCard key={category.id} product={category} />
-          ))
-        }
+        return (
+          <span key={title}>
+            <h2> {title}</h2>
+            {
+              categories[title].map((category) => (
+                <ProductCard key={category.id} product={category} />
+              ))
+            }
+          </span>
+        );
       })}
     </div>
   );

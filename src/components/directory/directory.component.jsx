@@ -2,7 +2,7 @@ import "./directory.style.scss";
 import CategoryItem from "../category-item/category-item.component";
 
 export default function Directory({ categories }) {
-  console.log(categories);
+  // console.log(categories);
 
   return (
     <>

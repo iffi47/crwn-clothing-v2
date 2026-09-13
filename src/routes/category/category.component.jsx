@@ -5,14 +5,15 @@ import { CategoriesContext } from "../../contexts/categories.context";
 import ProductCard from "../../components/product-card/product-card.component";
 
 export default function Category() {
-  const {category} = useParams();
-  const {categories} = useContext(CategoriesContext);
+  const { category } = useParams();
+  const { categories } = useContext(CategoriesContext);
   const [products, setProducts] = useState(categories[category]);
   useEffect(() => {
     setProducts(categories[category]);
-  },[category, categories])
-  return(
+  }, [category, categories])
+  return (
     <>
+      <h2 className="title">{category.toLocaleUpperCase()}</h2>
       <div className="category-container">
         {products && products.map((product) => (
           <ProductCard key={product.id} product={product} />

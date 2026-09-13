@@ -1,5 +1,5 @@
 import "./directory.style.scss";
-import CategoryItem from "../category-item/category-item.component";
+import DirectoryItem from "../directory-item/directory-item.component";
 
 export default function Directory({ categories }) {
   // console.log(categories);
@@ -7,17 +7,15 @@ export default function Directory({ categories }) {
   return (
     <>
       <div className="categories-container">
-        {Object.keys(categories).map((title) => {
-          <>
-            {categories[title].map((product) => (
-              <CategoryItem
-                key={product.id}
-                cat={product}
-                id={product.id}
-              />
-            ))}
-          </>
-        })}
+        {Object.keys(categories).map((title) =>
+          categories[title].map((product) => (
+            <DirectoryItem
+              key={product.id}
+              cat={product}
+              id={product.id}
+            />
+          ))
+        )}
       </div>
     </>
   )

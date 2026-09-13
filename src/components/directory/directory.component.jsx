@@ -7,15 +7,12 @@ export default function Directory({ categories }) {
   return (
     <>
       <div className="categories-container">
-        {Object.keys(categories).map((title) =>
-          categories[title].map((product) => (
-            <DirectoryItem
-              key={product.id}
-              cat={product}
-              id={product.id}
-            />
-          ))
-        )}
+        {categories.map((category) => (
+          <DirectoryItem
+            key={category.id}
+            cat={category}
+          />
+        ))}
       </div>
     </>
   )

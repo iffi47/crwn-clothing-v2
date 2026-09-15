@@ -14,8 +14,8 @@ export default function Category() {
   }, [category, categories])
   return (
     <>
-      <Title className="title">{category.toLocaleUpperCase()}</Title>
-      <CategoryContainer className="category-container">
+      <Title>{category.toLocaleUpperCase()}</Title>
+      <CategoryContainer>
         {products && products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

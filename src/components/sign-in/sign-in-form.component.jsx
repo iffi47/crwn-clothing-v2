@@ -4,7 +4,7 @@ import { getRedirectResult } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 // import "./sign-in.styles.scss";
 import { ButtonsContainer, SignInContainer } from "./sign-in.styles";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 // import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
@@ -62,8 +62,8 @@ export default function SignIn() {
           <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmitData} />
           <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmitData} />
           <ButtonsContainer>
-            <Button buttonType="inverted" type="submit">SignIn</Button>
-            <Button buttonType="google" onClick={signInWithGoogle} type="button">Sign in with Google</Button>
+            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} type="submit">SignIn</Button>
+            <Button buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle} type="button">Sign in with Google</Button>
           </ButtonsContainer>
         </form>
       </SignInContainer>

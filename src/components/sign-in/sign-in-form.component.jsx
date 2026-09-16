@@ -2,7 +2,8 @@ import { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, auth, signinWithGooglePopup, signinWithMailAndPassword } from "../../utlis/firebase.utils";
 import { getRedirectResult } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
-import "./sign-in.styles.scss";
+// import "./sign-in.styles.scss";
+import { ButtonsContainer, SignInContainer } from "./sign-in.styles";
 import Button from "../button/button.component";
 // import { UserContext } from "../../contexts/user.context";
 
@@ -54,18 +55,18 @@ export default function SignIn() {
   };
   return (
     <>
-      <div className="sign-in-container">
+      <SignInContainer>
         <h2>Already have an account?</h2>
         <span>Sign in with your email and password</span>
         <form onSubmit={handleSubmit}>
           <FormInput label="Email" required type="email" name="email" value={email} onChange={handleSubmitData} />
           <FormInput label="Enter Password" required type="password" name="password" value={password} onChange={handleSubmitData} />
-          <div className="buttons-container">
+          <ButtonsContainer>
             <Button buttonType="inverted" type="submit">SignIn</Button>
             <Button buttonType="google" onClick={signInWithGoogle} type="button">Sign in with Google</Button>
-          </div>
+          </ButtonsContainer>
         </form>
-      </div>
+      </SignInContainer>
     </>
   )
 }

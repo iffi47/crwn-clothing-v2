@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 export default function CartDropdown() {
-  const { cartItems, addToCartItems } = useContext(CartContext);
+  const { cartItems, addItemToCart } = useContext(CartContext);
   return(
     <>
       <CartDropDownContainer>

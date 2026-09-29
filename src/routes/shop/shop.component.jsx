@@ -1,8 +1,26 @@
 import { Routes, Route } from "react-router-dom";
 import Category from "../category/category.component";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
+import {
+  addCollectionAndDocuments,
+  getCategoriesAndDocuments,
+} from "../../utlis/firebase.utils.js";
+import { useDispatch } from "react-redux";
+import { SHOP_DATA } from "../../shop-data.js";
+import { setCategories } from "../../store/categories/categories.action.js";
+import { useEffect } from "react";
 
 export default function Shop() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    addCollectionAndDocuments("categories", SHOP_DATA);
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+      // console.log(categoryMap);
+      dispatch(setCategories(categoryMap));
+    };
+    getCategoriesMap();
+  }, []);
   return (
     // <div className="shop-container">
     //   {Object.keys(categories).map((title) => {

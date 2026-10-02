@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, auth, signinWithGooglePopup, signinWithMailAndPassword } from "../../utlis/firebase.utils";
-import { getRedirectResult } from "firebase/auth";
+// import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, auth, signinWithGooglePopup, signinWithMailAndPassword } from "../../utlis/firebase.utils";
+// import { getRedirectResult } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 // import "./sign-in.styles.scss";
 import { ButtonsContainer, SignInContainer } from "./sign-in.styles";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { useDispatch } from "react-redux";
+import { emailSigninStart, googleSingInStart } from "../../store/user/user.action";
 // import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
@@ -16,6 +18,7 @@ const defaultFormFields = {
 export default function SignIn() {
   const [userData, setUserData] = useState(defaultFormFields);
   const { email, password } = userData;
+  const dispatch = useDispatch();
   // const { setCurrentUser } = useContext(UserContext);
   const resetFormFields = () => {
     setUserData(defaultFormFields)
@@ -31,8 +34,9 @@ export default function SignIn() {
     // if (password !== confirmPassword) return;
     if (!password || !email) return;
     try {
-      const {user} = await signinWithMailAndPassword(email, password)
+      // const {user} = await signinWithMailAndPassword(email, password)
       // setCurrentUser(user)
+      dispatch(emailSigninStart(email, password))
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -48,10 +52,11 @@ export default function SignIn() {
     }
   };
   const signInWithGoogle = async () => {
-    await signinWithGooglePopup();
+    // await signinWithGooglePopup();
     // setCurrentUser(user);
     // await createUserDocumentFromAuth(user)
     // console.log(response);
+    dispatch(googleSingInStart());
   };
   return (
     <>

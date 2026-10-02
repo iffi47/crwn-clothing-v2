@@ -15,5 +15,9 @@ export const setCurrentUser = (user) => {
 export const checkUserSession = () => createAction(USER_ACTION_TYPES.CHECK_USER_SESSION);
 export const googleSingInStart = () => createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);
 export const emailSigninStart = (email, password) => createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START,{email, password});
+export const signOutStart = () =>
+ createAction(USER_ACTION_TYPES.SIGN_OUT_START);
+export const signOutSuccess = () =>
+ createAction(USER_ACTION_TYPES.SIGN_OUT_SUCCESS);
 export const signinSuccess = (user) => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user);
 export const signinFailure = (error) => createAction(USER_ACTION_TYPES.SIGN_IN_FAILURE, error);

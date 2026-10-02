@@ -5,13 +5,13 @@ import { NavigationContainer, NavLink, NavLinksContainer, LogoContainer } from "
 import { ReactComponent as CrownLogo } from "../../assets/images/007 crown.svg";
 // import { UserContext } from "../../contexts/user.context";
 // import { useContext } from "react";
-import { signOutUser } from "../../utlis/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 // import { CartContext } from "../../contexts/cart.context";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 import { setIsCartOpen } from "../../store/cart/cart.action";
+import { signOutStart } from "../../store/user/user.action";
 
 const Navigation = () => {
   // const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -22,6 +22,7 @@ const Navigation = () => {
   const handleIsCartOpen = () => {
     dispatch(setIsCartOpen(!isCartOpen))
   }
+  const handleSignOut = () => dispatch(signOutStart());
  return (
    <>
      <NavigationContainer>
@@ -35,7 +36,7 @@ const Navigation = () => {
          <NavLink to="/checkout">
            CHECKOUT
          </NavLink>
-         {currentUser ? <NavLink as="span" onClick={signOutUser}>SIGN OUT</NavLink> : <NavLink to="/auth">
+         {currentUser ? <NavLink as="span" onClick={handleSignOut}>SIGN OUT</NavLink> : <NavLink to="/auth">
            SIGN IN
          </NavLink>}
          <CartIcon onClick={handleIsCartOpen} />

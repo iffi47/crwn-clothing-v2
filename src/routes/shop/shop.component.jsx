@@ -7,14 +7,14 @@ import {
 } from "../../utlis/firebase.utils.js";
 import { useDispatch } from "react-redux";
 import { SHOP_DATA } from "../../shop-data.js";
-import { fetchCategoriesAsync } from "../../store/categories/categories.action.js";
+import { fetchCategoriesStart } from "../../store/categories/categories.action.js";
 import { useEffect } from "react";
 
 export default function Shop() {
   const dispatch = useDispatch();
   useEffect(() => {
     addCollectionAndDocuments("categories", SHOP_DATA);
-    dispatch(fetchCategoriesAsync())
+    dispatch(fetchCategoriesStart())
   }, []);
   return (
     // <div className="shop-container">
